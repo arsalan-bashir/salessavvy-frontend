@@ -1,5 +1,6 @@
 import {useNavigate} from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
+import "../assets/styles.css";
 
 const LoginPage = () => {
     const [username,setUsername]=useState("")
@@ -17,7 +18,7 @@ const LoginPage = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:9090/api/login", {
+            const response = await fetch("http://localhost:9090/api/auth/login", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({username, password}),
@@ -26,15 +27,18 @@ const LoginPage = () => {
             const data = await response.json();
 
             if (response.ok) {
-                if(data.message === "Success") {
+                if(data.role === "CUSTOMER") {
                     navigate("/customerHome", { state: data });
                 }
+                else if(data.role === "ADMIN") {
+                    navigate("/adminHome", { state: data });
+                }
                 else {
-                    alert(data.message)
-                    navigate("/");
+                    alert("Invalid Role")
+                    navigate("/login");
                 }
             } else {
-                setError(data.message || "Login failed");
+                setError(data.error || "Login failed");
             }
         }
         catch (err) {

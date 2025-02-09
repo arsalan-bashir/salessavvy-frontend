@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {useNavigate} from "react-router-dom";
+import "../assets/styles.css";
 
 const RegisterPage = () => {
 
@@ -31,7 +32,7 @@ const RegisterPage = () => {
 
             if (response.ok) {
                 alert(data.message)
-                navigate("/");
+                navigate("/login");
             }
             else {
                 setError(data.error || "Registration failed")
@@ -115,6 +116,7 @@ const RegisterPage = () => {
                                className="login-input"
                                onChange = {(event) => setRole(event.target.value)}
                                required >
+                            <option value="" disabled>Select your role</option>
                             <option value="CUSTOMER">Customer</option>
                             <option value="ADMIN">Admin</option>
                         </select>
@@ -126,7 +128,7 @@ const RegisterPage = () => {
                     Register
                 </button>
             </form>
-            <a className="register-redirect" href="/">Existing User? Login here!</a>
+            <a className="register-redirect" href="/login">Existing User? Login here!</a>
             {error && <p className="register-error">{error}</p>}
         </div>
     )
