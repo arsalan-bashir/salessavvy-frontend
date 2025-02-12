@@ -21,6 +21,7 @@ const LoginPage = () => {
             const response = await fetch("http://localhost:9090/api/auth/login", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
+                credentials: "include",
                 body: JSON.stringify({username, password}),
                 });
 
@@ -28,10 +29,10 @@ const LoginPage = () => {
 
             if (response.ok) {
                 if(data.role === "CUSTOMER") {
-                    navigate("/customerHome", { state: data });
+                    navigate("/customerHome");
                 }
                 else if(data.role === "ADMIN") {
-                    navigate("/adminHome", { state: data });
+                    navigate("/adminHome");
                 }
                 else {
                     alert("Invalid Role")
@@ -64,6 +65,7 @@ const LoginPage = () => {
                        className="login-input"
                        onChange = {(event) => setPassword(event.target.value)}
                        placeholder='Password' />
+                <a className="forgot-pw" href="/forgotpassword">Forgot Password?</a>
                 <button
                     type='submit'
                     className="login-button">

@@ -2,7 +2,7 @@
 
 body {
     background-color: #5cb3ee;
-    font-family: "Kumbh Sans";
+    font-family: "Kumbh Sans" ,"Century Gothic", sans-serif;
 }
 
 .container {
@@ -42,7 +42,13 @@ body {
 }
 .left-section .title {
     margin: 0;
+    font-size: 4rem;
+    background-image: linear-gradient(90deg, #f15513 10%, #35b3f1 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 800 !important;
 }
+
 
 .left-section .description {
     overflow: hidden;

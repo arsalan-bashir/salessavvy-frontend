@@ -7,16 +7,22 @@ const RegisterPage = () => {
     const [fullname,setName]=useState("")
     const [username,setUsername]=useState("")
     const [password,setPassword]=useState("")
+    const [checkPassword, setCheckPass] = useState("")
     const [email,setEmail]=useState("")
     const [phone,setPhone]=useState("")
     const [age,setAge]=useState("")
     const [role,setRole]=useState("CUSTOMER")
     const [error,setError]=useState("")
     const navigate = useNavigate();
+    
 
     const handleRegister = async (event) => {
         event.preventDefault();
         setError(null);
+        if(password !== checkPassword) {
+            alert("Password mismatch");
+            return;
+        }
 
         try {
             const response = await fetch("http://localhost:9090/api/users/register",{
@@ -79,6 +85,17 @@ const RegisterPage = () => {
                                placeholder='Enter Password' required />
                     </div>
                     <div className="form-group">
+                        <label className="login-label" htmlFor="re-password">Confirm Password</label>
+                        <input type='password'
+                               id="re-password"
+                               value={checkPassword}
+                               className="login-input"
+                               onChange = {(event) => setCheckPass(event.target.value)}
+                               placeholder='Re Enter Password' required />
+                    </div>
+                </div>
+                <div className="item-group">
+                    <div className="form-group">
                         <label className="login-label" htmlFor="email">Email</label>
                         <input type='email'
                                id="email"
@@ -87,8 +104,6 @@ const RegisterPage = () => {
                                onChange = {(event) => setEmail(event.target.value)}
                                placeholder='Enter Email' required />
                     </div>
-                </div>
-                <div className="item-group">
                     <div className="form-group">
                         <label className="login-label" htmlFor="phone">Phone</label>
                         <input type='text'
@@ -98,6 +113,8 @@ const RegisterPage = () => {
                         onChange = {(event) => setPhone(event.target.value)}
                         placeholder='Enter Phone' required />
                     </div>
+                </div>
+                <div className="item-group">
                     <div className="form-group">
                         <label className="login-label" htmlFor="age">Age</label>
                         <input type='number'

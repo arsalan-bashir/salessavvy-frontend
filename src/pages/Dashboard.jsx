@@ -1,14 +1,125 @@
-import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar";
+import CategoryNav from "./components/CategoryNavigation";
+import ProductList from "./components/ProductList";
 import "../assets/styles.css";
 
 export default function Dashboard() {
-    const location = useLocation();
-    const user = location.state;
+    const [username, setUsername] = useState("")
+    const [user, setUser] = useState(null);
+    const [cartCount, setCartCount] = useState(0)
+    const [categories, setCategories] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [isCartLoading, setIsCartLoading] = useState(true);
+    const [cartError, setCartError] = useState(false);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        fetchProducts();
+        if (username) {
+          fetchCartCount();
+        }
+      }, [username]);
+
+    const fetchProducts = async (category = '') => {
+        try {
+            const response = await fetch(`http://localhost:9090/api/products${category ? `?category=${category}` : ''}`, 
+                { credentials: "include" })
+                .then(response => {
+                    if (!response.ok) {
+                        alert("HTTP error! Status: ${response.status}");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setUser(data.user || "Guest");
+                    setUsername(data.user.username)
+                    setProducts(data.products || []);
+                    setCategories(data.categories || []);
+                    setLoading(false);
+                });
+        }
+        catch(err) {
+            setError(err.message);
+            setLoading(false);
+        };
+    }
+
+    const fetchCartCount = async () => {
+        setIsCartLoading(true)
+        try {
+            const response = await fetch(`http://localhost:9090/api/cart/items/count?username=${username}`, {
+                credentials: 'include',
+            });
+
+            const count = await response.json();
+            setCartCount(count)
+            setCartError(false)
+        }
+        catch(err) {
+            setCartError(true);
+            alert("Error fetching cart count: "+ err);
+        }
+        finally {
+            setIsCartLoading(false)
+        }
+    };
+
+    const handleCategoryClick = (category) => {
+        fetchProducts(category)
+    }
+
+    const handleAddToCart = async (productId) => {
+
+        if(!username) {
+            alert("Username issues!!");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:9090/api/cart/add", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                    credentials: 'include',
+                    body: JSON.stringify({ productId, username })
+            })
+            if(response.ok) {
+                fetchCartCount();
+            }
+            else {
+                alert("Failed to add product to cart");
+            }
+        } 
+        catch(err) {
+            alert("Error adding to cart: "+ err);
+        } 
+    };
+
     return (
         <>
-            <div className="dashboard-container">
-                <h1>Hello {user.username}</h1>
-                <h2>Welcome to Customer Dashboard</h2>
+            <Navbar 
+                user={user} 
+                count={cartCount} 
+                fetchProducts={fetchProducts} />
+
+            <div className="main-container">
+                <div className="dashboard-container">
+                    <CategoryNav 
+                        categories={categories} 
+                        onCategoryClick={handleCategoryClick} />
+                        
+                    {loading ? (
+                        <div className="loading-container">
+                            <p>Loading products...</p>
+                        </div>
+                    ) : (
+                        <ProductList 
+                            products={products} 
+                            onAddToCart={handleAddToCart} />
+                    )}
+                </div>
+                
             </div>
         </>
     );
