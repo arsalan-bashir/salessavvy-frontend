@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu, MenuItem, IconButton, AppBar, Toolbar, Typography, Button, Badge } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -11,6 +12,7 @@ const Navbar = (props) => {
     const [name, setName] = useState("Guest")
     const [username, setUsername] = useState("guest")
     const [email, setEmail] = useState("user@user")
+    const navigate = useNavigate()
     
     useEffect(() => {
         if (props.user) {
@@ -48,11 +50,11 @@ const Navbar = (props) => {
     };
 
     const handleHomeClick = () => {
-        props.fetchProducts(); 
+        navigate('/customerHome') 
     };
 
     const handleCartClick = () => {
-        alert("Cart Button Pressed");
+        navigate('/cart')
     };
 
     useEffect(() => {

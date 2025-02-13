@@ -100,8 +100,7 @@ export default function Dashboard() {
         <>
             <Navbar 
                 user={user} 
-                count={cartCount} 
-                fetchProducts={fetchProducts} />
+                count={cartCount} />
 
             <div className="main-container">
                 <div className="dashboard-container">

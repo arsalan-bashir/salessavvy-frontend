@@ -409,3 +409,225 @@ body {
     transform: translate(-1px, -1px);
     box-shadow: 2px 2px 0 black;
 }
+
+.navigate-back div {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.navigate-back div:hover {
+    color: blue;
+}
+
+.cart-container {
+    display: flex;
+    justify-content: space-evenly;
+    height: 95%;
+    padding: 10px;
+    overflow:hidden;
+}
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+    min-width: calc(40%);
+    border-radius: 10px;
+    height: 100%;
+}
+
+@media (max-width: 800px) {
+    .cart-container {
+        flex-direction: column;
+        justify-content: start;
+        gap: 10px;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: none transparent;
+    }
+}
+
+.items-heading {
+    display: flex;
+    flex-direction: column;
+    line-height: 0;
+    text-align: start;
+    border-bottom: 1px solid #ddd;
+}
+
+.items-heading p {
+    font-size: small;
+}
+
+.item-container .items-list {
+    margin-top: 5px;
+    padding: 5px;
+    display: flex;
+    height: 100%;
+    gap: 11px;
+    flex-direction: column;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #777bff transparent;
+}
+
+.cart-item {
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    min-height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-item-image {
+    flex: 1;
+    display: flex;
+    height: 80%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.cart-item-image img {
+    width: 120px;
+    height: 100%;
+    object-fit:scale-down;
+
+}
+
+.cart-item-info {
+    flex: 2;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-evenly;
+    text-align: left;
+}
+
+.cart-item-info > * {
+    margin: 0;
+}
+
+.cart-item-controls {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.cart-item-controls > div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.cart-item-controls > .quantity-controls {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    height: 50px;
+}
+
+.cart-item-controls button {
+    border-radius: 5px;
+    padding: 0 10px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s ease-in;
+}
+
+.cart-item-controls button:hover {
+    background-color: #777bff;
+}
+
+.minus-btn {
+    background-color: #db8888;
+}
+
+.plus-btn {
+    background-color: #8dbdbd;
+}
+
+.remove-btn {
+    background-color: #ff4b4b;
+}
+
+
+.summary-container {
+    min-width: calc(40%);
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: start;
+    height: fit-content;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-container div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-container div:nth-of-type(2),
+.summary-container div:nth-of-type(3) {
+
+    margin-top: -20px;
+}
+.summary-container div:nth-of-type(3) {
+    border-bottom: 1px solid #ddd;
+}
+
+.summary-container div .checkout-btn {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #777bff;
+    transition: .3s ease-in-out;
+}
+
+.summary-container div .checkout-btn:hover {
+    box-shadow: 2px 2px 1px black;
+    transform: translate(-1px, -1px);
+}
+
+
+
+.loading-container {
+    display: flex;
+    height: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #f00;
+}
