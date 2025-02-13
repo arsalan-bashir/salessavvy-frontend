@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import CategoryNav from "./components/CategoryNavigation";
 import ProductList from "./components/ProductList";
+import LoadingIcon from '@mui/icons-material/RefreshRounded';
+import ErrorIcon from '@mui/icons-material/Error';
 import "../assets/styles.css";
 
 export default function Dashboard() {
@@ -108,9 +110,17 @@ export default function Dashboard() {
                         categories={categories} 
                         onCategoryClick={handleCategoryClick} />
                         
-                    {loading ? (
+                        {error ? (
+                        <div className="error-container">
+                            <ErrorIcon sx={{ fontSize: 80, color: 'red' }} />
+                            <h4>{error}</h4>
+                        </div>
+                    ) : loading ? (
                         <div className="loading-container">
-                            <p>Loading products...</p>
+                            <LoadingIcon 
+                                className="spinner"
+                                sx={{ fontSize: 60, color: '#777bff' }}
+                            />
                         </div>
                     ) : (
                         <ProductList 

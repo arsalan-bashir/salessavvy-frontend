@@ -27,6 +27,23 @@ const Navbar = (props) => {
         setAnchorEl(event.currentTarget);
     };
 
+    const handleLogout = async () => {
+        try {
+          const response = await fetch('http://localhost:9090/api/auth/logout', {
+            method: 'POST',
+            credentials: 'include',
+          });
+    
+          if (response.ok) {
+            navigate('/');
+          } else {
+            console.error('Failed to log out');
+          }
+        } catch (error) {
+          console.error('Error during logout:', error);
+        }
+      };
+
     
     const handleMouseLeave = () => {
         if (!isHovered) {
@@ -132,7 +149,7 @@ const Navbar = (props) => {
                     </MenuItem>
                     <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
                     <MenuItem onClick={handleCloseMenu}>Change Password</MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
             </Toolbar>
         </AppBar>

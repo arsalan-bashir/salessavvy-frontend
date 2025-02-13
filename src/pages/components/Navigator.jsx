@@ -1,11 +1,15 @@
 import React from "react"
 import "../../assets/styles.css";
+
 import NavIcon from '@mui/icons-material/ArrowBackRounded';
+import { useNavigate } from "react-router-dom";
 
 export default function Navigator() {
 
+    const navigate = useNavigate();
+
     const handleNavigator = () => {
-        alert("AWWW!! Never Look Back")
+        navigate('/customerHome')
     }
     return (
         <nav className="navigate-back">
