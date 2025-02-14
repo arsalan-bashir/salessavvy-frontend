@@ -5,6 +5,7 @@ import RegisterPage from "./pages/RegisterPage"
 import Dashboard from "./pages/Dashboard"
 import AdminDashboard from "./pages/AdminDashboard"
 import Cart from "./pages/Cart"
+import OrderPage from "./pages/OrderPage";
 
 const AppRoutes = () => {
     return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
             <Route path="/customerHome" element={<Dashboard />} />
             <Route path="/adminHome" element={<AdminDashboard />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/orders" element={<OrderPage />} />
         </Routes>
     );
 }

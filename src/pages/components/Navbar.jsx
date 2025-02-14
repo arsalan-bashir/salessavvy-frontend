@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menu, MenuItem, IconButton, AppBar, Toolbar, Typography, Button, Badge } from '@mui/material';
+import { Menu, MenuItem, IconButton, AppBar, Toolbar, Typography, Button, Badge, Dialog, DialogContent, DialogTitle, DialogActions } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import logo from '../../assets/salessavvy-logo.png';
+import UserProfile from './UserProfile';
 import "../../assets/styles.css";
 
 const Navbar = (props) => {
@@ -12,6 +13,7 @@ const Navbar = (props) => {
     const [name, setName] = useState("Guest")
     const [username, setUsername] = useState("guest")
     const [email, setEmail] = useState("user@user")
+    const [openProfile, setOpenProfile] = useState(false);
     const navigate = useNavigate()
     
     useEffect(() => {
@@ -70,6 +72,9 @@ const Navbar = (props) => {
         navigate('/customerHome') 
     };
 
+    const handleOrderClick = () => {
+        navigate("/orders", {state: {count: props.count}})
+    };
     const handleCartClick = () => {
         navigate('/cart')
     };
@@ -87,72 +92,94 @@ const Navbar = (props) => {
         };
     }, [anchorEl]);
 
+    const handleProfileClick = () => {
+        setOpenProfile(true);
+    };
+
+    const handleCloseProfile = () => {
+        setOpenProfile(false);
+    };
+
     return (
-        <AppBar className="navbar" position="fixed">
-            <Toolbar>
-                <Typography className="nav-title" variant="h4" component="div" sx={{ flexGrow: 1 }}>
-                    <img src={logo} alt="Logo" style={{ height: '40px', marginRight: '10px' }} />
-                    SalesSavvy
-                </Typography>
-                <Button 
-                    onClick={handleHomeClick}
-                    color="inherit">Home</Button>
-                <Button color="inherit">Orders</Button>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    aria-label="cart of current user"
-                    onClick={handleCartClick}
-                    color="inherit"
-                >
-                    <Badge badgeContent={props.count} color="error">
-                        <ShoppingCartIcon />
-                    </Badge>
-                </IconButton>
+        <>
+            <AppBar className="navbar" position="fixed">
+                <Toolbar>
+                    <Typography className="nav-title" variant="h4" component="div" sx={{ flexGrow: 1 }}>
+                        <img src={logo} alt="Logo" style={{ height: '40px', marginRight: '10px' }} />
+                        SalesSavvy
+                    </Typography>
+                    <Button 
+                        onClick={handleHomeClick}
+                        color="inherit">Home</Button>
+                    <Button 
+                        onClick={handleOrderClick}
+                        color="inherit">Orders
+                    </Button>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        aria-label="cart of current user"
+                        onClick={handleCartClick}
+                        color="inherit"
+                    >
+                        <Badge badgeContent={props.count} color="error">
+                            <ShoppingCartIcon />
+                        </Badge>
+                    </IconButton>
 
-                <IconButton
-                    size="large"
-                    edge="end"
-                    aria-label="account of current user"
-                    aria-haspopup="true"
-                    onMouseEnter={handleMouseEnter}  
-                    onMouseLeave={handleMouseLeave}  
-                    color="inherit"
-                >
-                    <AccountCircle />
-                    {name}
-                </IconButton>
+                    <IconButton
+                        size="large"
+                        edge="end"
+                        aria-label="account of current user"
+                        aria-haspopup="true"
+                        onMouseEnter={handleMouseEnter}  
+                        onMouseLeave={handleMouseLeave}  
+                        color="inherit"
+                    >
+                        <AccountCircle />
+                        {name}
+                    </IconButton>
 
-                {/* Menu for dropdown */}
-                <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)} 
-                    onClose={handleCloseMenu} 
-                    anchorOrigin={{
-                        vertical: 'bottom', 
-                        horizontal: 'center',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',  
-                        horizontal: 'center',
-                    }}
-                    onMouseEnter={handleMenuMouseEnter}  
-                    onMouseLeave={handleMenuMouseLeave}  
-                >
-                    <MenuItem disabled>
-                        <div>
-                            <strong>{username}</strong>
-                            <br />
-                            <small>{email}</small>
-                        </div>
-                    </MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>Change Password</MenuItem>
-                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                </Menu>
-            </Toolbar>
-        </AppBar>
+                    {/* Menu for dropdown */}
+                    <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        open={Boolean(anchorEl)} 
+                        onClose={handleCloseMenu} 
+                        anchorOrigin={{
+                            vertical: 'bottom', 
+                            horizontal: 'center',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',  
+                            horizontal: 'center',
+                        }}
+                        onMouseEnter={handleMenuMouseEnter}  
+                        onMouseLeave={handleMenuMouseLeave}  
+                    >
+                        <MenuItem disabled>
+                            <div>
+                                <strong>{username}</strong>
+                                <br />
+                                <small>{email}</small>
+                            </div>
+                        </MenuItem>
+                        <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+                        <MenuItem onClick={handleCloseMenu}>Change Password</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    </Menu>
+                </Toolbar>
+            </AppBar>
+            <Dialog open={openProfile} onClose={handleCloseProfile} maxWidth="sm" fullWidth>
+                <DialogTitle>User Profile</DialogTitle>
+                <DialogContent>
+                    <UserProfile />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseProfile} color="primary">Close</Button>
+                </DialogActions>
+            </Dialog>
+        </>
     );
 };
 

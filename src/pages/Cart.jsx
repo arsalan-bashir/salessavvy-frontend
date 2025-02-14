@@ -3,11 +3,10 @@ import LoadingIcon from '@mui/icons-material/RefreshRounded';
 import ErrorIcon from '@mui/icons-material/Error';
 import Navbar from "./components/Navbar";
 import CartItems from "./components/CartItems";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
 
-    const location = useLocation();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [cartCount, setCartCount] = useState(0);

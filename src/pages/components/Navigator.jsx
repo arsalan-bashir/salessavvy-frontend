@@ -1,6 +1,5 @@
 import React from "react"
 import "../../assets/styles.css";
-
 import NavIcon from '@mui/icons-material/ArrowBackRounded';
 import { useNavigate } from "react-router-dom";
 
