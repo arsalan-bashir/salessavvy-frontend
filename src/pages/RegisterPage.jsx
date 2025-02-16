@@ -135,7 +135,7 @@ const RegisterPage = () => {
                                required >
                             <option value="" disabled>Select your role</option>
                             <option value="CUSTOMER">Customer</option>
-                            <option value="ADMIN">Admin</option>
+                            <option value="ADMIN" disabled>Admin</option>
                         </select>
                     </div>
                 </div>

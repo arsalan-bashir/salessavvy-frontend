@@ -272,6 +272,7 @@ body {
 .nav-title {
     font-size: 1.5rem;
     background-image: linear-gradient(90deg, #f15513 20%, #35b3f1 30%);
+    background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     font-weight: 800 !important;
@@ -755,4 +756,115 @@ body {
 .order-detail h4,
 .order-detail h5 {
     margin: 0;
+}
+
+
+/* ADMIN STYLES */
+
+.admin-container {
+    width: 90dvw;
+    height: 90dvh;
+    border: 2px solid #777bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+}
+
+.AdminLogin {
+    border: 2px solid #41b074;
+    background-color: rgb(234, 252, 242);
+}
+
+.home-button {
+    background-color: #4CAF50 !important;
+    width: 30%;
+    align-self: center;
+}
+
+.AdminLogin h1 {
+    color:#41b074 !important;
+}
+
+.admin-form input:focus {
+    border: 2px solid #41b074 !important;
+}
+
+.admin-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 20px;
+    padding: 10px 20px;
+}
+
+.admin-dashboard > div {
+    flex: 1 1 30%;
+    background-color: #eef;
+    border-radius: 10px;
+    transition: .3s ease-in;
+}
+
+.admin-dashboard > div:hover {
+    box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 100), 0 0 0 0 rgba(0, 0, 0, 100);
+}
+
+.admin-profile {
+    background-color: inherit !important;
+}
+
+.admin-profile span {
+    margin-left: 5px;
+    position: relative;
+}
+
+.card {
+    background-color: #f6f3f3;
+    border-radius: 20px;
+    box-shadow: 0 5px 6px rgba(4, 1, 1, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    width: 650px;
+}
+
+.card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight:bolder;
+    color: #da5151;
+    text-align: center;
+    text-decoration: auto;
+    font-family: sans-serif;
+    background: #8ed5ef;
+    border-radius: 50px;
+    width: 200px;
+    margin: 20px auto;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #000000;
+    margin-top: 5px;
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.teams{
+    font-size: 0.9rem;
+    color: #10420a;
+    text-decoration: underline;
+}
+.card-team {
+    font-size: 0.9rem;
+    color: #24025f;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style: oblique;
 }

@@ -31,12 +31,9 @@ const LoginPage = () => {
                 if(data.role === "CUSTOMER") {
                     navigate("/customerHome");
                 }
-                else if(data.role === "ADMIN") {
-                    navigate("/adminHome");
-                }
                 else {
                     alert("Invalid Role")
-                    navigate("/login");
+                    navigate("/");
                 }
             } else {
                 setError(data.error || "Login failed");
@@ -65,12 +62,18 @@ const LoginPage = () => {
                        className="login-input"
                        onChange = {(event) => setPassword(event.target.value)}
                        placeholder='Password' />
-                <a className="forgot-pw" href="/forgotpassword">Forgot Password?</a>
+                <a className="forgot-pw" href="#">Forgot Password?</a>
                 <button
                     type='submit'
                     className="login-button">
                     Login
                 </button>
+                <button
+                        type=''
+                        className="login-button home-button"
+                        onClick={()=> navigate('/')}>
+                        Home
+                    </button>
             </form>
             <a className="login-redirect" href="/register">New User? Register here!</a>
             {error && <p className="login-error">{error}</p>}

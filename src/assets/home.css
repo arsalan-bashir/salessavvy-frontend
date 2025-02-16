@@ -88,6 +88,15 @@ body {
     margin-top: 50px;
 }
 
+.home-link:first-child {
+    border: 1px solid #777bff;
+}
+
+.home-link:first-child:hover {
+    box-shadow: 2px 2px 0 0 rgba(0, 255, 255, 100), 0 0 0 0 rgba(0, 255, 255, 100);
+}
+
+
 .home-link:hover {
     background-color: #5cb3ee;
     color: white;
@@ -100,4 +109,8 @@ body {
 
 .home-link:hover .icon {
     filter: drop-shadow(1px 1px 0 black) drop-shadow(1px 1px 0 black);
+}
+
+.home-link:first-child:hover .icon {
+    filter: drop-shadow(1px 1px 0 rgb(255, 255, 255)) drop-shadow(1px 1px 0 rgb(252, 252, 252));
 }

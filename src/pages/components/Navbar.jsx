@@ -130,6 +130,7 @@ const Navbar = (props) => {
                     <IconButton
                         size="large"
                         edge="end"
+                        className="admin-profile"
                         aria-label="account of current user"
                         aria-haspopup="true"
                         onMouseEnter={handleMouseEnter}  

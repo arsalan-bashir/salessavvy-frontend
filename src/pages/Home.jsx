@@ -3,6 +3,7 @@ import homeImg from '../assets/homepage-img.svg';
 import logo from '../assets/salessavvy-logo.png';
 import regIcon from '../assets/reg-icon.svg';
 import loginIcon from '../assets/login-icon.svg';
+import adminIcon from '../assets/admin-login.svg'
 
 export default function Home()  {
     return (
@@ -13,6 +14,9 @@ export default function Home()  {
                     <h1 className="title">Sales Savvy</h1>
                     <p className="description">Smart Selling, Seamless Shopping</p>
                     <div className="home-links">
+                        <a className="home-link" href="/admin">
+                            <img className="icon" src={adminIcon} alt="logo" />
+                            Admin Login</a>
                         <a className="home-link" href="/register">
                             <img className="icon" src={regIcon} alt="logo" />
                             New Customer</a>
