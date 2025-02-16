@@ -61,8 +61,12 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
       case "monthlyBusiness": {
         const month = formData.month;
         const year = formData.year;
-        onSubmit({ month, year });
-        break;
+        if (month !== null && year !== null) {
+          onSubmit({ month, year });
+          break;
+        } else {
+          alert("Value Required!!")
+        }
       }
       case "dailyBusiness": {
         const date = formData.date;
@@ -104,6 +108,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                     placeholder="Name"
                     value={formData.name}
                     onChange={handleInputChange}
+                    required
                   />
                 </div>
 
@@ -116,6 +121,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                     placeholder="Price"
                     value={formData.price}
                     onChange={handleInputChange}
+                    required
                   />
                 </div>
 
@@ -128,6 +134,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                     placeholder="Stock"
                     value={formData.stock}
                     onChange={handleInputChange}
+                    required
                   />
                 </div>
 
@@ -140,6 +147,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                     placeholder="Category ID"
                     value={formData.categoryId}
                     onChange={handleInputChange}
+                    required
                   />
                 </div>
 
@@ -152,6 +160,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                     placeholder="Image URL"
                     value={formData.imageUrl}
                     onChange={handleInputChange}
+                    required
                   />
                 </div>
                 <div className="modal-form-item">
@@ -162,6 +171,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                     placeholder="Description"
                     value={formData.description}
                     onChange={handleInputChange}
+                    required
                   ></textarea>
                 </div>
               </form>
@@ -220,6 +230,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                   placeholder="Enter Product ID"
                   value={inputValue}
                   onChange={handleGeneralInputChange}
+                  required
                 />
               </form>
               <button onClick={handleSubmit}>Delete</button>
@@ -227,7 +238,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
             </>
           ) : (
             <div>
-              <h2>Product Deleted Successfully</h2>
+              <h2>{response.message}</h2>
               <button onClick={onClose}>Close</button>
             </div>
           ))}
@@ -242,6 +253,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                 placeholder="Enter User ID"
                 value={inputValue}
                 onChange={handleGeneralInputChange}
+                required
               />
             </form>
             <button onClick={handleSubmit}>Submit</button>
@@ -304,8 +316,9 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                       type="number"
                       id="month"
                       name="month"
-                      placeholder="10"
+                      placeholder="1-12"
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <div className="modal-form-item">
@@ -316,6 +329,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                       name="year"
                       placeholder="2025"
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <button onClick={handleSubmit}>Sumbit</button>
@@ -326,7 +340,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                   <div className="business-response-item">
                     <div>Total Business: ₹ </div>
                     <div>
-                      {response?.dailyBusiness?.totalBusiness?.toFixed(2)}
+                      {response?.monthlyBusiness?.totalBusiness?.toFixed(2)}
                     </div>
                   </div>
                   <div className="business-response-item">
@@ -365,6 +379,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                       name="date"
                       placeholder="2025-12-31"
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <button onClick={handleSubmit}>Sumbit</button>
@@ -414,6 +429,7 @@ const CustomModal = ({ modalType, onClose, onSubmit, response }) => {
                       name="year"
                       placeholder="2025"
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <button onClick={handleSubmit}>Sumbit</button>
@@ -611,6 +627,7 @@ const ModifyUserFormComponent = ({ onClose }) => {
               id="username"
               name="username"
               defaultValue={userDetails?.username}
+              required
             />
           </div>
 
@@ -621,6 +638,7 @@ const ModifyUserFormComponent = ({ onClose }) => {
               id="email"
               name="email"
               defaultValue={userDetails?.email}
+              required
             />
           </div>
           <div className="modal-form-item">
@@ -630,6 +648,7 @@ const ModifyUserFormComponent = ({ onClose }) => {
               id="phone"
               name="phone"
               defaultValue={userDetails?.phone}
+              required
             />
           </div>
           <div className="modal-form-item">
@@ -639,6 +658,7 @@ const ModifyUserFormComponent = ({ onClose }) => {
               id="age"
               name="age"
               defaultValue={userDetails?.age}
+              required
             />
           </div>
           <div className="modal-form-item">
