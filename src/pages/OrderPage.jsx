@@ -72,7 +72,7 @@ export default function Cart() {
                         </div>
                     ) : (
                         orders.map((order) => (
-                            <div key={order.id} className="orders-list">
+                            <div key={order.product_id} className="orders-list">
                                 <div className="order-img">
                                     <img src={order.image_url} alt={order.name} />
                                 </div>
